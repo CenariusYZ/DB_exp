@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            {% if request.user == user %}
+            <div class="card mt-3 border-secondary">
+                <div class="card-header">
+                    个人信息
+                </div>
+                <div class="card-body">
+                    <p>用户名：{{request.user.user_name}}</p>
+                    <p>大学：{{request.user.uschool}}</p>
+                    <p>注册日期：{{request.user.date_joined}}</p>
+                    <a href="{% url 'logout' %}" class="btn btn-danger">登出</a>
+                </div>
+            </div>
+            {% endif %}
+            <div class="card mt-3 border-secondary">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.GET.page != "collect" %} active {% endif %}" href="{% url 'profile' %}?page=history">通过题目</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.GET.page == "collect" %} active {% endif %}" href="{% url 'profile' %}?page=collect">参与比赛</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    {% if request.GET.page != "collect" %}
+                    {% elif request.GET.page == "collect" %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

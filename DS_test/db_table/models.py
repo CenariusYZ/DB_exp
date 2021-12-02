@@ -1,11 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 # Create your models here.
-class UserInfo(models.Model):
+class UserInfo(AbstractUser):
     UserId = models.AutoField(primary_key=True)
-    user_name = models.CharField(max_length=20, verbose_name="用户名称")
-    upasswd = models.CharField(max_length=30, verbose_name="密码md5")
+    user_name = models.CharField(max_length=20, null=True, blank=True, verbose_name="用户名称")
+    upasswd = models.CharField(max_length=30, null=True, blank=True, verbose_name="密码md5")
     uschool = models.CharField(max_length=30, verbose_name="学校")
 
     class Meta:
