@@ -20,4 +20,5 @@ from db_table import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('userinfo.urls')),
+    path('', include('soj.urls')),
 ]

@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" role="navigation">
+    <a class="navbar-brand" href="/">SOJ 2.0</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link {% if '/' == request.path %} active {% endif %}" href="/">首页</a>
+            <a class="nav-item nav-link {% if 'analysis' in request.path %} active {% endif %}" href="/analysis/">题库</a>
+            <a class="nav-item nav-link {% if 'prediction' in request.path %} active {% endif %}" href="/prediction/">比赛</a>
+            <a class="nav-item nav-link {% if 'help' in request.path %} active {% endif %}" href="/help/">提交记录</a>
+        </div>
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            
+            <li class="nav-item">
+                {% if request.user.is_authenticated %}
+		<a style="margin-left:10px" href="{% url 'profile' %}" class="btn btn-outline-light btn-sm">{{ request.user.user_name }}</a>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn btn-outline-info btn-sm">登录</a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</nav>
