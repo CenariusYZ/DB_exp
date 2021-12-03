@@ -33,6 +33,9 @@
                     便利快捷的ACM-ICPC题目赛事管理系统.
                 </p>
                 <!-- Buttons -->
+                
+                {% if request.user.is_authenticated %}
+                {% else %}
                 <div class="text-center text-md-left mt-5">
                     <a href="{% url 'register' %}" class="btn btn-primary btn-icon" target="_self">
                         <span class="btn-inner--text">现在注册</span>
@@ -40,6 +43,7 @@
                     </a>
                     <a href="{% url 'login' %}" class="btn btn-neutral btn-icon d-none d-lg-inline-block" target="_self">登录</a>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
