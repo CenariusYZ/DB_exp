@@ -12,6 +12,6 @@ def index(request):
     problems_list = ProblemInfo.objects.all()
     problems = []
     # 随机推荐五个题目
-    problems = random.sample(list(problems_list), 5)
+    problems = random.sample(list(problems_list), 4)
     context = {"problems": problems}
     return render(request, 'soj/index.html', context)

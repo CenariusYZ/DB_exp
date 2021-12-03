@@ -4,9 +4,74 @@
 {% endblock %}
 {% block body %}
 
-<main>
-<ul type="none">
-</ul>
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <h1 class="display-4 text-center text-md-left mb-3">
+                        {{ problem.ProblemName }}
+                    </h1>
+                </div>
+                <div class="row">
+                    <div id="editormd-view" class="card col-md-7">
+                        <textarea id="append-test" style="display:none;">{{ problem.ProblemDiscription }}</textarea>
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="card col-md-12">
+                                <div class="card-body">
+                                    <h3 class="card-title">题目限制</h3>
+                                    <p class="card-text">
+                                        <strong>{{ problem.ProblemTimeLimit }}s / {{ problem.ProblemMemLimit}}M</strong>
+                                    </p>
+                                    <a href="#" class="btn btn-success">提交</a>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="card col-md-12">
+                                <div class="card-body">
+                                    <h3 class="card-title">题目推荐</h3>
+                                    {% for p in problems %}
+                                    <p class="card-text"><a href="{% url 'detail' p.ProblemId %}">P{{ p.ProblemId }} {{ p.ProblemName }}</a></p>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+    </div>
+</section>
 
+<script src=""></script>
+<script src="{% static 'libs/marked.min.js' %}"></script>
+<script src="{% static 'libs/prettify.min.js' %}"></script>
+<script src="{% static 'libs/raphael.min.js' %}"></script>
+<script src="{% static 'libs/underscore.min.js' %}"></script>
+<script src="{% static 'libs/sequence-diagram.min.js' %}"></script>
+<script src="{% static 'libs/flowchart.min.js' %}"></script>
+<script src="{% static 'libs/jquery.flowchart.min.js' %}"></script>
+<script type="text/javascript">
+    $(function() {
+        var testEditormdView = editormd.markdownToHTML("editormd-view", {
+            htmlDecode      : "style,script,iframe",  // you can filter tags decode
+            emoji           : true,
+            taskList        : true,
+            tex             : true,  // 默认不解析
+            flowChart       : true,  // 默认不解析
+            sequenceDiagram : true,  // 默认不解析
+            path            : "{% static 'libs/' %}"
+        });
+    });
+</script>
 
 {% endblock %}
