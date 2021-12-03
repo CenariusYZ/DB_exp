@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <!-- import jquery -->
+        <script src="https://s1.pstatp.com/cdn/expire-1-M/jquery/3.4.0/jquery.min.js" type="application/javascript"></script>
+        <!-- import bootstrap -->
+        <link href="https://s2.pstatp.com/cdn/expire-1-M/twitter-bootstrap/4.3.1/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+        <script src="https://s1.pstatp.com/cdn/expire-1-M/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js" type="application/javascript"></script>
+        <link href="https://s0.pstatp.com/cdn/expire-1-M/twitter-bootstrap/4.3.1/css/bootstrap-grid.min.css" type="text/css" rel="stylesheet" />
+        <script src="https://s2.pstatp.com/cdn/expire-1-M/vue/2.6.10/vue.min.js" type="application/javascript"></script>
+        <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+        <!-- mobile device -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- title -->
+        <title>{% block title %}SOJ 2.0{% endblock %}</title>
+        <link href="{% static 'css/iconfont.css' %}" rel="stylesheet">
+        <script src="{% static 'js/common/toaster.js' %}"></script>
+        {% block head %}
+        {% endblock %}
+        <!-- baidu statistic -->
+        <!-- shenglue -->
+        <style>
+            .css2 {
+            overflow: hidden; /*自动隐藏文字*/
+            text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+            width: 35em;/*不允许出现半汉字截断*/
+            height:90px;
+            color:#4d5156;border:1px #ff8000;
+            }
+        </style>
+        <!-- font-awesome css -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+        <!-- Pure UI css -->
+        <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+  
+        <!-- head block -->
+    </head>
+    <body>
+        {% include 'nav.html' %}
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

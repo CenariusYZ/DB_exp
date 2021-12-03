@@ -6,9 +6,9 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
             <a class="nav-item nav-link {% if '/' == request.path %} active {% endif %}" href="/">首页</a>
-            <a class="nav-item nav-link {% if 'analysis' in request.path %} active {% endif %}" href="/analysis/">题库</a>
-            <a class="nav-item nav-link {% if 'prediction' in request.path %} active {% endif %}" href="/prediction/">比赛</a>
-            <a class="nav-item nav-link {% if 'help' in request.path %} active {% endif %}" href="/help/">提交记录</a>
+            <a class="nav-item nav-link {% if 'problem' in request.path %} active {% endif %}" href="/problem/">题库</a>
+            <a class="nav-item nav-link {% if 'match' in request.path %} active {% endif %}" href="/match/">比赛</a>
+            <a class="nav-item nav-link {% if 'attempts' in request.path %} active {% endif %}" href="/attempts/">提交记录</a>
         </div>
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             

@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'problem',
+    'match',
+    'attempts',
     'soj',
     'userinfo',
     'db_table'
