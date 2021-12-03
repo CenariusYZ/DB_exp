@@ -6,6 +6,25 @@
 
 <main>
 <ul type="none">
+{% for problem in problems %}
+
+    <div class="pure-g">
+        <div class="pure-u-1-12"></div>
+        <div class="pure-u-1-2">
+            <li style="font-size: 20px;">
+                <br>
+                <a href="{% url 'detail' problem.ProblemId %}">
+                {{ problem.ProblemName }}
+                </a>{{problem.ProblemTimeLimit}} {{ problem.ProblemMemLimit}}
+                
+                
+                <div style="color:#838b8f;">{{ problem.ProblemDiscription}}</div>
+                <br>
+            </li>
+        </div>
+        <div class="pure-u-1-12"></div>
+    </div>
+{% endfor %}
 </ul>
 <section class="slice py-7">
     <div class="container">

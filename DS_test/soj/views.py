@@ -5,5 +5,13 @@ from django.contrib import auth
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib import messages
 
+from db_table.models import ProblemInfo
+import random
+    
 def index(request):
-    return render(request, "soj/index.html")
+    problems_list = ProblemInfo.objects.all()
+    problems = []
+    # 随机推荐五个题目
+    problems = random.sample(list(problems_list), 5)
+    context = {"problems": problems}
+    return render(request, 'soj/index.html', context)
