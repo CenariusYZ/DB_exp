@@ -13,7 +13,7 @@
         <div class="pure-u-1-2">
             <li style="font-size: 20px;">
                 <br>
-                <a href="{% url 'problem'%}">
+                <a href="{% url 'detail' problem.ProblemId %}">
                 {{ problem.ProblemName }}
                 </a>{{problem.ProblemTimeLimit}} {{ problem.ProblemMemLimit}}
                 
