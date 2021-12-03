@@ -4,23 +4,21 @@
 {% endblock %}
 {% block body %}
 
-<main>
-<ul type="none">
-</ul>
 <section class="slice py-7">
     <div class="container">
         <div class="row row-grid align-items-center">
             <div class="col-12 col-md-5 col-lg-6 order-md-2 text-left">
-                <!-- Image -->
-                {% comment %} <figure class="w-100">
-                    <img alt="Image placeholder" src="assets/img/svg/illustrations/illustration-3.svg" class="img-fluid mw-md-120">
-                </figure> {% endcomment %}
                 {% for problem in problems %}
-                    <li style="font-size: 20px;">
-                        <a href="{% url 'detail' problem.ProblemId %}">
-                        {{ problem.ProblemName }}
-                        </a>
-                    </li>
+                <div class="card shadow-none">
+                    <div class="p-3 d-flex">
+                        <div>
+                            <span class="h6"><a href="{% url 'detail' problem.ProblemId %}">{{ problem.ProblemName }}</a></span>
+                            <p class="text-sm text-muted mb-0">
+                                {{ problem.ProblemDiscription }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
                 {% endfor %}
             </div>
             <div class="col-12 col-md-7 col-lg-6 order-md-1 pr-md-5">
