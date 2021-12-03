@@ -4,9 +4,23 @@
 {% endblock %}
 {% block body %}
 
-<main>
-<ul type="none">
-</ul>
-
+<table class="table">
+    <thead class="">
+    <tr>
+        <th class="col-1" scope="col">题目ID</th>
+        <th class="col-4" scope="col">题目名称</th>
+        <th class="col-1" scope="col">limits</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for problem in problems %}
+        <tr>
+            <th scope="row">{{ problem.ProblemId }}</th>
+            <td><a href="{% url 'detail' problem.ProblemId %}">{{ problem.ProblemName }}</a></td>
+            <td>{{ problem.ProblemMemLimit }}m/{{ problem.ProblemTimeLimit }}s</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}
