@@ -28,7 +28,7 @@
                                     <p class="card-text">
                                         <strong>{{ problem.ProblemTimeLimit }}s / {{ problem.ProblemMemLimit}}M</strong>
                                     </p>
-                                    <a href="#" class="btn btn-success">提交</a>
+                                    <a href="{% url 'p_submit' problem.ProblemId %}" class="btn btn-success">提交</a>
                                 </div>
                             </div>
                         </div>

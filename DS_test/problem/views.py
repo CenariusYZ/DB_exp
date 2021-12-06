@@ -14,3 +14,11 @@ def detail(request, problem_id):
     problems = ProblemInfo.objects.all()
     problems = random.choices(list(problems), k=5)
     return render(request, 'problem/detail.html', {'problem': problem, 'problems': problems})
+
+def submit(request, problem_id):
+    problem = ProblemInfo.objects.get(ProblemId = problem_id)
+    return render(request, 'problem/submit.html', {'problem': problem})
+
+def submit_code(request, problem_id, code):
+    problem = ProblemInfo.objects.get(ProblemId = problem_id)
+    return render(request, 'problem/submit.html', {'problem': problem})
