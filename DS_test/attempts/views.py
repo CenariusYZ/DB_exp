@@ -54,8 +54,7 @@ def attempts_page(request, searchword, page_index):
         q = searchword
     if q is not None:
         searchword = q
-    print("-------------", searchword)
-    attempt_list = AttemptsInfo.objects.filter(User = request.user)
+    attempt_list = AttemptsInfo.objects.filter(User = request.user).order_by('AttemptTime')
     paginator = MyPaginator(attempt_list, 10)
     int(page_index)
     page = paginator.page(page_index)

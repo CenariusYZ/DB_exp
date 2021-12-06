@@ -29,7 +29,10 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <pre id="code" class="ace_editor" style="min-height:600px"><textarea class="ace_text-input"></textarea></pre>
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <pre id="code" class="ace_editor" style="min-height:600px"><textarea name="code" class="ace_text-input"></textarea></pre>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -42,7 +45,7 @@
                                     <p class="card-text">
                                         <strong>{{ problem.ProblemTimeLimit }}s / {{ problem.ProblemMemLimit}}M</strong>
                                     </p>
-                                    <a href="{% url 'p_submit' problem.ProblemId %}" class="btn btn-success">提交</a>
+                                    <button type="submit" class="btn btn-success">提交</button>
                                 </div>
                             </div>
                         </div>
@@ -80,6 +83,13 @@
         enableSnippets: true,
         enableLiveAutocompletion: true
     });
+    function postSubmit() {
+        var postUrl = "{% url 'code_submit' problem.ProblemId %}";
+        var code = editor.getValue();
+    }
+</script>
+<script>
+    
 </script>
 
 {% endblock %}
