@@ -12,7 +12,11 @@ def index(request):
     problems_list = ProblemInfo.objects.all()
     problems = []
     # 随机推荐五个题目
-    problems = random.choices(list(problems_list), k=4)
+    if len(problems_list) > 0:
+        problems_list = random.choices(list(problems_list), k=4)
+    for p in problems_list:
+        p.ProblemDiscription = p.ProblemDiscription[:20]
+        problems.append(p)
     context = {"problems": problems}
     return render(request, 'soj/index.html', context)
     

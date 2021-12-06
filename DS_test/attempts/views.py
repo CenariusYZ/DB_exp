@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.contrib import auth
 import random
 
 from db_table.models import AttemptsInfo
@@ -41,6 +42,12 @@ def attempts(request):
         return attempts_page(request, "请输入题目名称", 1)
 
 def attempts_page(request, searchword, page_index):
+    if isinstance(request.user, auth.models.AnonymousUser):
+        attempt_list = []
+        paginator = MyPaginator(attempt_list, 10)
+        page = paginator.page(page_index)
+        context = {"page": page, "paginator": paginator, "searchword": searchword}
+        return render(request, 'attempts/attempts.html', context)
     if searchword == "请输入题目名称":
         attempt_list = AttemptsInfo.objects.filter(User = request.user)
         paginator = MyPaginator(attempt_list, 10)

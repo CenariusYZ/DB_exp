@@ -31,7 +31,7 @@
                             <div class="col-md-12">
                                 <form action="" method="post">
                                     {% csrf_token %}
-                                    <pre id="code" class="ace_editor" style="min-height:600px"><textarea name="code" class="ace_text-input"></textarea></pre>
+                                    <pre id="code_editor" class="ace_editor" style="min-height:600px"><textarea class="ace_text-input"></textarea></pre>
                                 </form>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                                     <p class="card-text">
                                         <strong>{{ problem.ProblemTimeLimit }}s / {{ problem.ProblemMemLimit}}M</strong>
                                     </p>
-                                    <button type="submit" class="btn btn-success">提交</button>
+                                    <button type="submit" class="btn btn-success" onclick="postSubmit()">提交</button>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
 
 <script>
     //初始化对象
-    editor = ace.edit("code");
+    editor = ace.edit("code_editor");
 
     //设置风格和语言（更多风格和语言，请到github上相应目录查看）
     theme = "clouds"
@@ -86,6 +86,23 @@
     function postSubmit() {
         var postUrl = "{% url 'code_submit' problem.ProblemId %}";
         var code = editor.getValue();
+        var name = $("#name").val();
+        var csrfToken = $("[name='csrfmiddlewaretoken']").val();
+        var data = {
+            code: code,
+            csrfmiddlewaretoken: csrfToken
+        }
+        $.ajax({
+            type: "POST",
+            url: postUrl,
+            data: data,
+            success: (res)=>{
+                window.location.href = "{% url 'attempts' %}"
+            },
+            error: (res)=>{
+                console.log("error");
+            }
+        })
     }
 </script>
 <script>
