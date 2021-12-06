@@ -4,36 +4,24 @@
 {% endblock %}
 {% block body %}
 
-
-<img src="https://cdn.luogu.com.cn/upload/image_hosting/awxka25e.png"/>
-
 <table class="table">
     <thead class="">
     <tr>
         <th class="col-1" scope="col">比赛ID</th>
         <th class="col-4" scope="col">比赛名称</th>
-        <th class="col-1" scope="col">时间</th>
+        <th class="col-2" scope="col">时间</th>
     </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td><a href="{% url 'problem' %}">NOIP2021 自测</a></td>
-            <td>11-20 15:00 ~ 11-22 18:00</td>
-        </tr>
         
+        {% for match in matchs %}
         <tr>
-            <th scope="row">2</th>
-            <td><a href="{% url 'problem' %}">【LGR-097】洛谷 11 月月赛 II & ✗✓OI Round 1 Div.2</a></td>
-            <td>11-13 14:00 ~ 18:30</td>
+            <th scope="row">{{ match.MatchId }}</th>
+            <td><a href="{% url 'match_detail' match.MatchId %}">{{ match.MatchName }}</a></td>
+            <td>{{ match.MatchStartTime }} ~ {{ match.MatchEndTime }}</td>
         </tr>
-        
-        <tr>
-            <th scope="row">3</th>
-            <td><a href="{% url 'problem' %}">【LGR-097】洛谷 11 月月赛 II & ✗✓OI Round 1 Div.1</a></td>
-            <td>11-13 14:00 ~ 18:30</td>
-        </tr>
+        {% endfor %}
     </tbody>
 </table>
-
+<a href="{% url 'add' %}" class="btn btn-success", style="margin-left:45%">新建比赛</a>
 {% endblock %}
