@@ -29,30 +29,26 @@ def register(request):
         request_password1 = request.POST.get('password1', '').strip()
         request_password2 = request.POST.get('password2', '').strip()
         message = verify_account(request_username, request_school, request_password1, request_password2)
-        
+        print(message)
         if len(message) == 0:
             try:
                 UserInfo.objects.create(
-                    user_name = request_username,
-                    uschool = request_school,
-                    is_active = True,
-                    upasswd = make_password(request_password1)
+                    username=request_username,
+                    user_name=request_username,
+                    uschool=request_school,
+                    is_active=True,
+                    upasswd=make_password(request_password1)
                 )
-
-                message = '注册成功，前往登录界面！'             #####修改
-                print ('???')
+                print("register ok.")
                 return render(request, "userinfo/login.html")
-            except:
-                print ('!!!')
+            except Exception as e:
+                print("register failed {}".format(e))
                 return render(request, "userinfo/register.html")
-
-        
-        messages.success(request, 'Hello world.')
         return render(request, "userinfo/register.html")
 
 
 def login(request):
-    print (request.user.is_authenticated)
+    print(request.user.is_authenticated)
     if request.user.is_authenticated:
         print(request.user.id)
         return redirect('/') # 无法重复登录
@@ -100,4 +96,6 @@ def logout(request):
     return redirect('/')
 
 def profile(request):
+    if isinstance(request.user, auth.models.anonymous):
+        return redirect(login)
     return render(request, "userinfo/profile.html")
