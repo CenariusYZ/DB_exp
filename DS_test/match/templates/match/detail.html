@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+{% endblock %}
+{% block body %}
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <h1 class="display-4 text-center text-md-left mb-3">
+                        {{ match.MatchName }}
+                    </h1>
+                </div>
+                <div class="row">
+                    <div id="editormd-view" class="card col-md-7">
+                        <h3 class="card-title">题目列表</h3>
+                        <table class="table">
+                            <thead class="">
+                            <tr>
+                                <th class="col-1" scope="col">题目ID</th>
+                                <th class="col-6" scope="col">题目名称</th>
+                                <th class="col-1" scope="col">limits</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for problem_match_info in problem_match_infos %}
+                                <tr>
+                                    <th scope="row">{{ problem_match_info.problem.ProblemId }}</th>
+                                    <td><a href="{% url 'detail' problem_match_info.problem.ProblemId %}">{{ problem_match_info.problem.ProblemName }}</a></td>
+                                    <td>{{ problem_match_info.problem.ProblemMemLimit }}m/{{ problem_match_info.problem.ProblemTimeLimit }}s</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="card col-md-12">
+                                <div class="card-body">
+                                    <h3 class="card-title">比赛时间</h3>
+                                    <p class="card-text">
+                                        <strong>{{ match.MatchStartTime }} ~ {{ match.MatchEndTime}}</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src=""></script>
+<script src="{% static 'libs/marked.min.js' %}"></script>
+<script src="{% static 'libs/prettify.min.js' %}"></script>
+<script src="{% static 'libs/raphael.min.js' %}"></script>
+<script src="{% static 'libs/underscore.min.js' %}"></script>
+<script src="{% static 'libs/sequence-diagram.min.js' %}"></script>
+<script src="{% static 'libs/flowchart.min.js' %}"></script>
+<script src="{% static 'libs/jquery.flowchart.min.js' %}"></script>
+<script type="text/javascript">
+    $(function() {
+        var testEditormdView = editormd.markdownToHTML("editormd-view", {
+            htmlDecode      : "style,script,iframe",  // you can filter tags decode
+            emoji           : true,
+            taskList        : true,
+            tex             : true,  // 默认不解析
+            flowChart       : true,  // 默认不解析
+            sequenceDiagram : true,  // 默认不解析
+            path            : "{% static 'libs/' %}"
+        });
+    });
+</script>
+
+{% endblock %}

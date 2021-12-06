@@ -34,12 +34,37 @@ class MyPaginator(Paginator):   # 继承Paginator
         return super().page(number)
 
 def attempts(request):
-    return attempts_page(request, 1)
+    searchword = request.GET.get('q')
+    if searchword:
+        return attempts_page(request, searchword, 1)
+    else:
+        return attempts_page(request, "请输入题目名称", 1)
 
-def attempts_page(request, page_index):
+def attempts_page(request, searchword, page_index):
+    if searchword == "请输入题目名称":
+        attempt_list = AttemptsInfo.objects.filter(User = request.user)
+        paginator = MyPaginator(attempt_list, 10)
+        int(page_index)
+        page = paginator.page(page_index)
+        context = {"page": page, "paginator": paginator, "searchword": searchword}
+        return render(request, 'attempts/attempts.html', context)
+
+    q = request.GET.get('q')
+    if(searchword and q is None):
+        q = searchword
+    if q is not None:
+        searchword = q
+    print("-------------", searchword)
     attempt_list = AttemptsInfo.objects.filter(User = request.user)
     paginator = MyPaginator(attempt_list, 10)
     int(page_index)
     page = paginator.page(page_index)
-    context = {"page": page}
+    context = {"page": page, "paginator": paginator, "searchword": searchword}
+    if not q:
+        return render(request, 'attempts/attempts.html', context)
+        
+    attempt_list = AttemptsInfo.objects.filter(Q(Problem__ProblemName=q) & Q(User = request.user))
+    paginator = MyPaginator(attempt_list, 10)
+    page = paginator.page(page_index)
+    context = {"page": page, "paginator": paginator, "searchword": searchword}
     return render(request, "attempts/attempts.html", context)

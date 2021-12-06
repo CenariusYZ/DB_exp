@@ -15,3 +15,4 @@ def index(request):
     problems = random.choices(list(problems_list), k=4)
     context = {"problems": problems}
     return render(request, 'soj/index.html', context)
+    
